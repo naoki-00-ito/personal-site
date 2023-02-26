@@ -14,10 +14,9 @@
         </v-card-text>
         <v-card-text>
           <div class="mt-n2 ml-n2">
-            <v-chip v-for="(tag, index) in article.tags" :key="index" color="pink" label text-color="white" class="mt-2 ml-2">
-              <v-icon class="mr-1">mdi-label</v-icon>
-              {{ tag }}
-            </v-chip>
+            <span v-for="(tag, index) in article.tags" :key="index" :data-tag="tag">
+              <Tag :tagName="tag" />
+            </span>
           </div>
         </v-card-text>
       </v-card>
@@ -27,10 +26,12 @@
 
 <script>
 import Category from "@/components/Category"
+import Tag from "@/components/Tag"
 
 export default {
   components: {
-    Category
+    Category,
+    Tag,
   },
   async asyncData({ $content }) {
     const blog = await $content('blog').sortBy('createdAt', 'desc').fetch();
