@@ -6,8 +6,15 @@ export const state = () => ({
   ],
   tags: [
     ...taxonomy.tags
-  ]
+  ],
+  indexPerPage: 15,
 })
+
+export const mutations = {
+  setIndexPerPage(state, count) {
+    state.indexPerPage = count
+  }
+}
 
 export const getters = {
   getTagNameBySlug(state) {
@@ -27,3 +34,4 @@ export const getters = {
     }
   }
 }
+
