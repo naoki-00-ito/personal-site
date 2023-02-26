@@ -7,10 +7,9 @@
         <v-divider class="mx-3 my-n1"></v-divider>
         <v-card-text class="pb-0">
           <div class="mt-n2 ml-n2">
-            <v-chip v-for="(category, index) in article.category" :key="index" color="primary" label class="mt-2 ml-2">
-              <v-icon class="mr-1">mdi-folder</v-icon>
-              {{ category }}
-            </v-chip>
+            <span v-for="(category, index) in article.category" :key="index" :data-category="category">
+              <Category :categoryName="category" />
+            </span>
           </div>
         </v-card-text>
         <v-card-text>
@@ -27,7 +26,12 @@
 </template>
 
 <script>
+import Category from "@/components/Category"
+
 export default {
+  components: {
+    Category
+  },
   async asyncData({ $content }) {
     const blog = await $content('blog').sortBy('createdAt', 'desc').fetch();
     return {
