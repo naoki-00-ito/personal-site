@@ -1,14 +1,13 @@
 <template>
-  <ul>
-    <li v-for="article in blog" :key="article.slug">
-      <nuxt-link :to="`/blog/${article.slug}`">
-        <time :datetime="article.createdAt">
-          {{ article.createdAt | date }}
-        </time>
-        <p>{{ article.title }}</p>
-      </nuxt-link>
-    </li>
-  </ul>
+  <v-row>
+    <v-col v-for="article in blog" :key="article.slug" cols="12">
+      <v-card :to="`/blog/${article.slug}`" hover>
+        <v-card-title>{{ article.title }}</v-card-title>
+        <v-divider class="mx-3 my-n1"></v-divider>
+        <v-card-subtitle>{{ article.createdAt | date }}</v-card-subtitle>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
