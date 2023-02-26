@@ -10,7 +10,7 @@
       <li class="pagenation__item" v-for="pg in num" :key="pg.num">
         <nuxt-link
           v-if="pg.pg"
-          :to="'/articles/pages/' + pg.num"
+          :to="'/articles/page/' + pg.num"
           :class="current == pg.num ? 'is-current' : ''"
         >
           {{ pg.num }}
