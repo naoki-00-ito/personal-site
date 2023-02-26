@@ -6,7 +6,7 @@
         <v-divider class="mx-3 my-n1"></v-divider>
         <v-card-subtitle>{{ article.createdAt | date }}</v-card-subtitle>
         <v-card-text>
-          <v-chip color="primary" label>{{ article.category }}</v-chip>
+          <v-chip v-for="(category, index) in article.category" :key="index" color="primary" label>{{ category }}</v-chip>
         </v-card-text>
       </v-card>
     </v-col>
