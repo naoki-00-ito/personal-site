@@ -24,6 +24,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@mdi/font/css/materialdesignicons.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -73,7 +74,10 @@ export default {
           success: colors.green.accent3
         }
       }
-    }
+    },
+    icons: {
+      iconfont: 'mdi',
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
