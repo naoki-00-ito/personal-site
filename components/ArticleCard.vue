@@ -1,5 +1,5 @@
 <template>
-  <v-card :to="`/blog/${article.slug}`" hover>
+  <v-card :to="`/articles/${article.slug}`" hover>
     <v-card-title>{{ article.title }}</v-card-title>
     <v-card-subtitle>{{ article.createdAt | date }}</v-card-subtitle>
     <v-divider class="mx-3 my-n1"></v-divider>
