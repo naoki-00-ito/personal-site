@@ -7,17 +7,22 @@
 </template>
 
 <script>
-import ArticleCard from "@/components/ArticleCard"
+import ArticleCard from "@/components/ArticleCard";
 
 export default {
   components: {
     ArticleCard,
   },
   async asyncData({ store, $content, params }) {
-    const articles = await $content('articles').where({ category: { $contains: params.slug }}).sortBy('createdAt', 'desc').fetch();
+    const articles = await $content("articles")
+      .where({ category: { $contains: params.slug } })
+      .sortBy("createdAt", "desc")
+      .skip(0)
+      .limit(store.state.indexPerPage)
+      .fetch();
     return {
-      articles
-    }
-  }
-}
+      articles,
+    };
+  },
+};
 </script>
