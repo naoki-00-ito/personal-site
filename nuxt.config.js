@@ -9,7 +9,7 @@ export default {
     titleTemplate: '%s - nuxt-blog',
     title: 'nuxt-blog',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'ja'
     },
     meta: [
       { charset: 'utf-8' },
@@ -24,10 +24,12 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@mdi/font/css/materialdesignicons.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~plugins/date-filter.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -60,7 +62,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
@@ -72,7 +74,10 @@ export default {
           success: colors.green.accent3
         }
       }
-    }
+    },
+    icons: {
+      iconfont: 'mdi',
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
