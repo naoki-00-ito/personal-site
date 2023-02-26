@@ -4,6 +4,9 @@
     <time :datetime="article.createdAt">
       {{ article.createdAt | date }}
     </time>
+    <div class="text-left">
+      <v-chip color="primary" label>{{ article.category }}</v-chip>
+    </div>
     <NuxtContent :document="article" />
   </article>
 </template>
