@@ -83,5 +83,47 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  generate: {
+    async routes() {
+      const { $content } = require('@nuxt/content')
+      const articles = await $content('articles').fetch()
+      const articlesRoutes = articles.map(article => `/articles/${article.slug}`)
+      const categories = await $content('articles').only(['category']).fetch()
+      const filteredCategories = categories.filter(cat => cat.category)
+      const categoriesRoutes = filteredCategories.reduce((prev, curr) => [...prev, ...curr.category.map(cat => `/category/${cat}/page/1`)], [])
+      const tags = await $content('articles').only(['tags']).fetch()
+      const filteredTags = tags.filter(tag => tag.tags)
+      const tagsRoutes = filteredTags.reduce((prev, curr) => [...prev, ...curr.tags.map(tag => `/tag/${tag}/page/1`)], [])
+
+      const articlesPerPage = 15 // 1ページあたりの記事数
+      const categoriesPerPage = 15 // 1ページあたりのカテゴリ数
+      const tagsPerPage = 15 // 1ページあたりのタグ数
+
+      const totalArticlesPages = Math.ceil(articlesRoutes.length / articlesPerPage)
+      const totalCategoriesPages = Math.ceil(categoriesRoutes.length / categoriesPerPage)
+      const totalTagsPages = Math.ceil(tagsRoutes.length / tagsPerPage)
+
+      const routes = []
+
+      for (let i = 1; i <= totalArticlesPages; i++) {
+        routes.push(`/articles/page/${i}`)
+      }
+
+      for (let i = 1; i <= totalCategoriesPages; i++) {
+        for (let cat of filteredCategories[i - 1].category) {
+          routes.push(`/category/${cat}/page/${i}`)
+        }
+      }
+
+      for (let i = 1; i <= totalTagsPages; i++) {
+        for (let tag of filteredTags[i - 1].tags) {
+          routes.push(`/tag/${tag}/page/${i}`)
+        }
+      }
+
+      return routes
+    }
   }
 }
