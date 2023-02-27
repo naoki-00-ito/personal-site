@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/category/notice", {data:[{articles:[]}],fetch:{},mutations:[]});

@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/tag/vue", {data:[{articles:[]}],fetch:{},mutations:[]});
