@@ -13,9 +13,12 @@ export default {
   components: {
     ArticleCard,
   },
-  async asyncData({ $content }) {
+  async asyncData({ store, $content, params }) {
     const articles = await $content("articles")
+      .where({ category: { $contains: params.slug } })
       .sortBy("createdAt", "desc")
+      .skip(0)
+      .limit(store.state.indexPerPage)
       .fetch();
     return {
       articles,

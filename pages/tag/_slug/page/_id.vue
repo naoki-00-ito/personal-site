@@ -1,0 +1,77 @@
+<template>
+  <div>
+    <v-row>
+      <v-col v-for="article in articles" :key="article.slug" cols="12">
+        <ArticleCard :article="article" />
+      </v-col>
+    </v-row>
+    <!-- pagenation -->
+    <ul class="c-pagenation">
+      <li class="c-pagenation__item" v-for="pg in num" :key="pg.num">
+        <nuxt-link
+          v-if="pg.pg"
+          :to="'/tag/' + $route.params.slug + '/page/' + pg.num"
+          :class="current == pg.num ? 'is-current' : ''"
+        >
+          {{ pg.num }}
+        </nuxt-link>
+        <span v-else>
+          {{ pg.num }}
+        </span>
+      </li>
+    </ul>
+    <!-- /pagenation -->
+  </div>
+</template>
+
+<script>
+import ArticleCard from "@/components/ArticleCard";
+
+export default {
+  components: {
+    ArticleCard,
+  },
+  validate({ redirect, params }) {
+    if (/[0-9]+/.test(params.id)) return true;
+    return redirect("/articles");
+  },
+  async asyncData({ store, $content, params }) {
+    const count = await $content("articles").fetch();
+    const current = params.id;
+    if (current > Math.ceil(count.length / store.state.indexPerPage))
+      redirect("/articles");
+
+    const from = store.state.indexPerPage * (params.id - 1);
+    const to = store.state.indexPerPage * params.id;
+
+    const articles = await $content("articles")
+      .where({ category: { $contains: params.slug } })
+      .sortBy("createdAt", "desc")
+      .skip(from)
+      .limit(to)
+      .fetch();
+
+    return {
+      articles,
+      current,
+      count: count.length,
+    };
+  },
+  computed: {
+    num() {
+      let tmp = [];
+      const max = Math.ceil(this.count / this.$store.state.indexPerPage);
+      for (let n = 1; n <= max; n++) {
+        if (n == 1 || n == max) {
+          tmp.push({ pg: true, num: n });
+        } else if (this.current - 2 <= n && n <= this.current + 2) {
+          tmp.push({ pg: true, num: n });
+        } else if (this.current - 2 - 1 == n || n == this.current + 2 + 1) {
+          tmp.push({ pg: false, num: "..." });
+        }
+      }
+      return tmp;
+    },
+  },
+};
+</script>
