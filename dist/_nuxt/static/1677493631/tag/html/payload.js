@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/tag/html", {data:[{articles:[]}],fetch:{},mutations:[]});
