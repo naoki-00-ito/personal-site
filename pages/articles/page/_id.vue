@@ -6,8 +6,8 @@
       </v-col>
     </v-row>
     <!-- pagenation -->
-    <ul class="pagenation">
-      <li class="pagenation__item" v-for="pg in num" :key="pg.num">
+    <ul class="c-pagenation">
+      <li class="c-pagenation__item" v-for="pg in num" :key="pg.num">
         <nuxt-link
           v-if="pg.pg"
           :to="'/articles/page/' + pg.num"

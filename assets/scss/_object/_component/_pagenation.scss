@@ -1,0 +1,29 @@
+.c-pagenation {
+  list-style: none;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  margin-left: -10px;
+
+  &__item {
+    margin-left: 10px;
+
+    a {
+      text-decoration: none;
+      color: #fff;
+      padding: 10px;
+      border-radius: 2px;
+      border: 1px solid transparent;
+      transition: .4s;
+
+      &.is-current {
+        background-color: #316dca;
+        border-color: #316dca;
+      }
+
+      &:not(.is-current):hover {
+        border-color: #444c56;
+      }
+    }
+  }
+}
