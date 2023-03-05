@@ -16,6 +16,12 @@
 import ArticleCard from "@/components/ArticleCard";
 
 export default {
+  head() {
+    return {
+      title: "nuxt-blog",
+      titleTemplate: "",
+    };
+  },
   components: {
     ArticleCard,
   },
