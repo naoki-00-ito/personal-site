@@ -18,8 +18,9 @@ import ArticleCard from "@/components/ArticleCard";
 export default {
   head() {
     return {
-      title: "nuxt-blog",
+      title: process.env.APP_NAME,
       titleTemplate: "",
+      meta: [{ hid: "og:type", property: "og:type", content: "website" }],
     };
   },
   components: {
