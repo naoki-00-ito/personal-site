@@ -46,6 +46,8 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    // Google Analytics
+    "@nuxtjs/google-gtag",
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -85,6 +87,11 @@ export default {
     icons: {
       iconfont: 'mdi',
     },
+  },
+
+  "google-gtag": {
+    id: process.env.GA_ID,
+    debug: true
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
