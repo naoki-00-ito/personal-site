@@ -6,16 +6,22 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - nuxt-blog',
-    title: 'nuxt-blog',
+    titleTemplate: `%s | ${process.env.APP_NAME}`,
     htmlAttrs: {
       lang: 'ja'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { hid: 'description', name: 'description', content: process.env.npm_package_description },
+      { name: 'format-detection', content: 'telephone=no' },
+      { hid: 'og:site_name', property: 'og:site_name', content: process.env.APP_NAME },
+      { hid: 'og:type', property: 'og:type', content: 'article' },
+      { hid: 'og:url', property: 'og:url', content: process.env.BASE_URL },
+      { hid: 'og:title', property: 'og:title', content: process.env.APP_NAME },
+      { hid: 'og:description', property: 'og:description', content: process.env.npm_package_description },
+      { hid: 'og:image', property: 'og:image', content: `${process.env.BASE_URL}/image/og.png` },
+      { name: 'twitter:card', content: 'summary' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -40,6 +46,8 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    // Google Analytics
+    "@nuxtjs/google-gtag",
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -79,6 +87,11 @@ export default {
     icons: {
       iconfont: 'mdi',
     },
+  },
+
+  "google-gtag": {
+    id: process.env.GA_ID,
+    debug: true
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
