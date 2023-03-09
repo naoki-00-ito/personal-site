@@ -32,8 +32,16 @@ const taxonomys = require("@/taxonomy.js");
 
 export default {
   head() {
+    const title = `「${this.taxonomyname}」の記事一覧 - ${this.pageNum}ページ`;
     return {
-      title: `「${this.taxonomyname}」の記事一覧 - ${this.pageNum}ページ`,
+      title: title,
+      meta: [
+        {
+          hid: "og:title",
+          property: "og:title",
+          content: `${title} | ${process.env.APP_NAME}`,
+        },
+      ],
     };
   },
   components: {
