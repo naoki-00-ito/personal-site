@@ -1,6 +1,8 @@
 <template>
   <div>
-    <v-row>
+    <h1>タグ「{{ taxonomyname }}」</h1>
+
+    <v-row class="mt-4">
       <v-col v-for="article in articles" :key="article.slug" cols="12">
         <ArticleCard :article="article" />
       </v-col>
@@ -16,10 +18,34 @@
 
 <script>
 import ArticleCard from "@/components/ArticleCard";
+const taxonomys = require("@/taxonomy.js");
 
 export default {
+  head() {
+    const title = `「${this.taxonomyname}」の記事一覧`;
+    return {
+      title: title,
+      meta: [
+        {
+          hid: "og:title",
+          property: "og:title",
+          content: `${title} | ${process.env.APP_NAME}`,
+        },
+      ],
+    };
+  },
   components: {
     ArticleCard,
+  },
+  data() {
+    return {
+      taxonomyname: "",
+    };
+  },
+  async created() {
+    const slug = this.$route.params.slug;
+    const taxonomy = taxonomys.category.find((c) => c.slug === slug);
+    this.taxonomyname = taxonomy ? taxonomy.name : "";
   },
   async asyncData({ store, $content, params }) {
     const articles = await $content("articles")
