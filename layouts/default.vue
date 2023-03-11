@@ -114,7 +114,7 @@ export default {
   data() {
     return {
       drawer: false,
-      appName: "nuxt-blog",
+      appName: "Blog",
     };
   },
 };
