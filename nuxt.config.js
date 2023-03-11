@@ -17,7 +17,6 @@ export default {
       { name: 'format-detection', content: 'telephone=no' },
       { hid: 'og:site_name', property: 'og:site_name', content: process.env.APP_NAME },
       { hid: 'og:type', property: 'og:type', content: 'article' },
-      { hid: 'og:url', property: 'og:url', content: process.env.BASE_URL },
       { hid: 'og:title', property: 'og:title', content: process.env.APP_NAME },
       { hid: 'og:description', property: 'og:description', content: process.env.npm_package_description },
       { hid: 'og:image', property: 'og:image', content: `${process.env.BASE_URL}/og.png` },
@@ -26,6 +25,14 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
+  },
+
+  head() {
+    return {
+      meta: [
+        { hid: 'og:url', property: 'og:url', content: process.env.BASE_URL + this.$route.path },
+      ],
+    }
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
