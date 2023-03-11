@@ -8,16 +8,17 @@
       </v-col>
     </v-row>
 
-    <div class="text-center mt-10">
-      <v-btn color="primary" :to="'/tag/' + $route.params.slug + '/page/1'"
-        >もっと見る</v-btn
-      >
-    </div>
+    <MoreButton
+      :url="nextUrl"
+      :articleNum="articles.length"
+      :requiredArticleNum="requiredArticleNum"
+    />
   </div>
 </template>
 
 <script>
 import ArticleCard from "@/components/ArticleCard";
+import MoreButton from "@/components/MoreButton";
 const taxonomys = require("@/taxonomy.js");
 
 export default {
@@ -36,6 +37,7 @@ export default {
   },
   components: {
     ArticleCard,
+    MoreButton,
   },
   data() {
     return {
@@ -44,15 +46,21 @@ export default {
   },
   async created() {
     const slug = this.$route.params.slug;
-    const taxonomy = taxonomys.category.find((c) => c.slug === slug);
+    const taxonomy = taxonomys.tags.find((c) => c.slug === slug);
     this.taxonomyname = taxonomy ? taxonomy.name : "";
   },
-  async asyncData({ store, $content, params }) {
+  async asyncData({ store, $content, params, route }) {
+    const nextUrl = `/tag/${route.params.slug}/page/1`;
+    const requiredArticleNum = store.state.indexPerPage;
     const articles = await $content("articles")
       .where({ tags: { $contains: params.slug } })
       .sortBy("createdAt", "desc")
+      .skip(0)
+      .limit(requiredArticleNum)
       .fetch();
     return {
+      nextUrl,
+      requiredArticleNum,
       articles,
     };
   },
