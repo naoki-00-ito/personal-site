@@ -14,6 +14,7 @@
           v-if="pg.pg"
           :to="'/tag/' + $route.params.slug + '/page/' + pg.num"
           :class="current == pg.num ? 'is-current' : ''"
+          class="white--text"
         >
           {{ pg.num }}
         </nuxt-link>
