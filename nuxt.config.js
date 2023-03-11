@@ -6,11 +6,10 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head() {
-    const baseUrl = process.env.BASE_URL
-    const appName = process.env.APP_NAME
-    const pageDescription = process.env.npm_package_description
-    const ogUrl = `${baseUrl}${this.$route.path}`
-    const ogImage = `${baseUrl}/og.png`
+    const baseUrl = process.env.BASE_URL;
+    const appName = process.env.APP_NAME;
+    const pageDescription = process.env.npm_package_description;
+    const ogImage = `${baseUrl}/og.png`;
 
     return {
       titleTemplate: `%s | ${appName}`,
@@ -26,7 +25,7 @@ export default {
         { hid: 'description', name: 'description', content: pageDescription },
         { name: 'format-detection', content: 'telephone=no' },
         { hid: 'og:site_name', property: 'og:site_name', content: appName },
-        { hid: 'og:url', property: 'og:url', content: ogUrl },
+        { hid: 'og:url', property: 'og:url', content: baseUrl },
         { hid: 'og:type', property: 'og:type', content: 'article' },
         { hid: 'og:title', property: 'og:title', content: appName },
         { hid: 'og:description', property: 'og:description', content: pageDescription },

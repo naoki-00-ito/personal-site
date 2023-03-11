@@ -32,6 +32,8 @@ export default {
   head() {
     const title = this.article.title;
     const description = this.article.description;
+    const baseUrl = process.env.BASE_URL;
+    const ogUrl = `${baseUrl}${this.$route.path}`;
     return {
       title: title,
       meta: [
@@ -46,6 +48,7 @@ export default {
           property: "og:description",
           content: description,
         },
+        { hid: "og:url", property: "og:url", content: ogUrl },
       ],
     };
   },
