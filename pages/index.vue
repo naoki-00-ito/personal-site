@@ -6,14 +6,17 @@
       </v-col>
     </v-row>
 
-    <div class="text-center mt-10">
-      <v-btn color="primary" to="/articles/page/1">もっと見る</v-btn>
-    </div>
+    <MoreButton
+      url="/articles/page/1"
+      :articleNum="articles.length"
+      :requiredArticleNum="requiredArticleNum"
+    />
   </div>
 </template>
 
 <script>
 import ArticleCard from "@/components/ArticleCard";
+import MoreButton from "@/components/MoreButton";
 
 export default {
   head() {
@@ -25,12 +28,16 @@ export default {
   },
   components: {
     ArticleCard,
+    MoreButton,
   },
-  async asyncData({ $content }) {
+  async asyncData({ store, $content }) {
+    const requiredArticleNum = store.state.indexPerPage;
     const articles = await $content("articles")
       .sortBy("createdAt", "desc")
+      .limit(requiredArticleNum)
       .fetch();
     return {
+      requiredArticleNum,
       articles,
     };
   },
