@@ -10,7 +10,9 @@ export default {
     const appName = process.env.APP_NAME;
     const pageDescription = process.env.npm_package_description;
     const ogImage = `${baseUrl}/og.png`;
-    const gaId = process.env.GA_ID;
+    const gtmID = process.env.GTM_ID;
+    const gtmHeadTag = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtmID}');`
+    const gtmBodyTag = `<iframe src="https://www.googletagmanager.com/ns.html?id=${gtmID}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`
 
     return {
       titleTemplate: `%s | ${appName}`,
@@ -35,14 +37,23 @@ export default {
         { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' }
       ],
 
-      script: [{
-        async: true,
-        src: `https://www.googletagmanager.com/gtag/js?id=${gaId}`
-      },
-      {
-        innerHTML: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', "${gaId}");`
-      }
+      script: [
+        {
+          hid: 'gtmHead',
+          innerHTML: gtmHeadTag
+        }
       ],
+      noscript: [
+        {
+          hid: 'gtmBody',
+          innerHTML: gtmBodyTag,
+          pbody: true
+        }
+      ],
+      __dangerouslyDisableSanitizersByTagID: {
+        'gtmHead': ['innerHTML'],
+        'gtmBody': ['innerHTML']
+      },
     }
   },
 
