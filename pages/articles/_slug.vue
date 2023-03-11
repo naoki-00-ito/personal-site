@@ -19,7 +19,9 @@
       </span>
     </div>
 
-    <NuxtContent :document="article" />
+    <div class="contents">
+      <NuxtContent :document="article" />
+    </div>
   </article>
 </template>
 
@@ -78,7 +80,7 @@ time {
   }
 }
 
-.nuxt-content-container {
+.contents {
   margin-top: $space-base * 2;
   padding-top: $space-base * 2;
   border-top: 1px solid #444;
