@@ -31,6 +31,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '@mdi/font/css/materialdesignicons.css',
+    'github-markdown-css/github-markdown.css',
     '@/assets/scss/style.scss',
   ],
 

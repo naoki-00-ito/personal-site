@@ -1,25 +1,27 @@
 <template>
   <article>
-    <h1>{{ article.title }}</h1>
-    <time :datetime="article.createdAt">
-      {{ article.createdAt | date }}
-    </time>
-    <div class="ml-n2 tips">
-      <span
-        v-for="(category, index) in article.category"
-        :key="index"
-        :data-category="category"
-      >
-        <Category :categoryName="category" />
-      </span>
-    </div>
-    <div class="ml-n2 tips">
-      <span v-for="(tag, index) in article.tags" :key="index" :data-tag="tag">
-        <Tag :tagName="tag" />
-      </span>
+    <div class="article-info">
+      <h1>{{ article.title }}</h1>
+      <time :datetime="article.createdAt">
+        {{ article.createdAt | date }}
+      </time>
+      <div class="ml-n2 tips">
+        <span
+          v-for="(category, index) in article.category"
+          :key="index"
+          :data-category="category"
+        >
+          <Category :categoryName="category" />
+        </span>
+      </div>
+      <div class="ml-n2 tips">
+        <span v-for="(tag, index) in article.tags" :key="index" :data-tag="tag">
+          <Tag :tagName="tag" />
+        </span>
+      </div>
     </div>
 
-    <div class="contents">
+    <div class="article-content">
       <NuxtContent :document="article" />
     </div>
   </article>
@@ -59,30 +61,40 @@ export default {
 <style scoped lang="scss">
 $space-base: 20px;
 
-h1 {
-  font-size: 40px;
-}
+.article {
+  &-info {
+    h1 {
+      font-size: 40px;
+    }
 
-time {
-  display: block;
-  margin-top: $space-base;
-}
+    time {
+      display: block;
+      margin-top: $space-base;
+    }
 
-.tips {
-  margin-top: $space-base / 2;
+    .tips {
+      margin-top: $space-base / 2;
 
-  & + & {
-    margin-top: $space-base / 4;
+      + .tips {
+        margin-top: $space-base / 4;
+      }
+
+      span {
+        pointer-events: none;
+      }
+    }
   }
 
-  span {
-    pointer-events: none;
-  }
-}
+  &-content {
+    margin-top: $space-base * 2;
+    padding-top: $space-base * 2;
+    border-top: 1px solid #444;
 
-.contents {
-  margin-top: $space-base * 2;
-  padding-top: $space-base * 2;
-  border-top: 1px solid #444;
+    ::v-deep .nuxt-content {
+      * + :where(h1, h2, h3, h4, h5, h6) {
+        margin-top: $space-base * 1.5;
+      }
+    }
+  }
 }
 </style>
