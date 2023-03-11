@@ -91,6 +91,11 @@ $space-base: 20px;
     border-top: 1px solid #444;
 
     ::v-deep .nuxt-content {
+      :where(h1, h2, h3, h4, h5, h6, ul) {
+        & + * {
+          margin-top: $space-base;
+        }
+      }
       * + :where(h1, h2, h3, h4, h5, h6) {
         margin-top: $space-base * 1.5;
       }
