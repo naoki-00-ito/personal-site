@@ -5,7 +5,11 @@
       {{ article.createdAt | date }}
     </time>
     <div class="ml-n2">
-      <span v-for="(category, index) in article.category" :key="index" :data-category="category">
+      <span
+        v-for="(category, index) in article.category"
+        :key="index"
+        :data-category="category"
+      >
         <Category :categoryName="category" />
       </span>
     </div>
@@ -21,11 +25,31 @@
 
 <script>
 export default {
-  async asyncData ({ $content, params }) {
-    const article = await $content('articles', params.slug).fetch()
+  head() {
+    const title = this.article.title;
+    const description = this.article.description;
     return {
-      article
-    }
-  }
-}
+      title: title,
+      meta: [
+        { hid: "description", name: "description", content: description },
+        {
+          hid: "og:title",
+          property: "og:title",
+          content: `${title} | ${process.env.APP_NAME}`,
+        },
+        {
+          hid: "og:description",
+          property: "og:description",
+          content: description,
+        },
+      ],
+    };
+  },
+  async asyncData({ $content, params }) {
+    const article = await $content("articles", params.slug).fetch();
+    return {
+      article,
+    };
+  },
+};
 </script>
