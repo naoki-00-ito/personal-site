@@ -1,43 +1,77 @@
 <template>
   <v-app>
+    <!-- Loading -->
+    <div v-if="loading">
+      <Loading />
+    </div>
+    <!-- /Loading -->
+
     <!-- header -->
     <header>
       <v-app-bar app dark>
-        <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
         <v-toolbar-title>{{ appName }}</v-toolbar-title>
+        <v-app-bar-nav-icon
+          @click="drawer = true"
+          class="ml-auto"
+        ></v-app-bar-nav-icon>
       </v-app-bar>
 
       <!-- drawer -->
-      <v-navigation-drawer v-model="drawer" fixed temporary>
+      <v-navigation-drawer v-model="drawer" right fixed temporary>
         <v-list nav dense>
+          <v-list-item class="px-0 d-flex justify-end">
+            <v-btn icon @click="drawer = false" class="text-right">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </v-list-item>
+
           <!-- links default -->
           <v-list-item-group>
             <v-list-item :to="'/'">
+              <v-list-item-icon class="mr-2">
+                <v-icon class="mt-n1">mdi-home</v-icon>
+              </v-list-item-icon>
               <v-list-item-title>HOME</v-list-item-title>
             </v-list-item>
           </v-list-item-group>
           <!-- /links default -->
 
+          <v-divider />
+
           <!-- links category -->
-          <p class="text-subtitle-1 mt-5 mb-2">カテゴリ</p>
-          <v-list-item-group>
+          <v-list-item-group class="my-6">
+            <v-list-item class="pointer-events-none">
+              <v-list-item-icon class="mr-2">
+                <v-icon small class="mt-n1">mdi-folder</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>カテゴリ</v-list-item-title>
+            </v-list-item>
             <v-list-item
               v-for="(category, index) in $store.state.category"
               :key="'category-' + index"
               :to="'/category/' + category.slug"
+              class="pl-10"
             >
               <v-list-item-title>{{ category.name }}</v-list-item-title>
             </v-list-item>
           </v-list-item-group>
           <!-- /links category -->
 
+          <v-divider />
+
           <!-- links tag -->
-          <p class="text-subtitle-1 mt-5 mb-2">タグ</p>
-          <v-list-item-group>
+          <v-list-item-group class="my-6">
+            <v-list-item class="pointer-events-none">
+              <v-list-item-icon class="mr-2">
+                <v-icon small class="mr-1">mdi-label</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>タグ</v-list-item-title>
+            </v-list-item>
             <v-list-item
               v-for="(tag, index) in $store.state.tags"
               :key="'tag-' + index"
               :to="'/tag/' + tag.slug"
+              class="pl-10"
             >
               <v-list-item-title>{{ tag.name }}</v-list-item-title>
             </v-list-item>
@@ -110,12 +144,31 @@
 </template>
 
 <script>
+import Loading from "@/components/Loading";
+
 export default {
   data() {
     return {
       drawer: false,
-      appName: "nuxt-blog",
+      appName: "Blog",
+      loading: true,
+    };
+  },
+  components: {
+    Loading,
+  },
+  mounted() {
+    document.onreadystatechange = () => {
+      if (document.readyState === "complete") {
+        this.loading = false;
+      }
     };
   },
 };
 </script>
+
+<style scoped lang="scss">
+.pointer-events-none {
+  pointer-events: none;
+}
+</style>

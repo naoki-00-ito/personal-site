@@ -4,7 +4,7 @@
     <time :datetime="article.createdAt">
       {{ article.createdAt | date }}
     </time>
-    <div class="ml-n2">
+    <div class="ml-n2 tips">
       <span
         v-for="(category, index) in article.category"
         :key="index"
@@ -13,7 +13,7 @@
         <Category :categoryName="category" />
       </span>
     </div>
-    <div class="ml-n2">
+    <div class="ml-n2 tips">
       <span v-for="(tag, index) in article.tags" :key="index" :data-tag="tag">
         <Tag :tagName="tag" />
       </span>
@@ -53,3 +53,34 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+$space-base: 20px;
+
+h1 {
+  font-size: 40px;
+}
+
+time {
+  display: block;
+  margin-top: $space-base;
+}
+
+.tips {
+  margin-top: $space-base / 2;
+
+  & + & {
+    margin-top: $space-base / 4;
+  }
+
+  span {
+    pointer-events: none;
+  }
+}
+
+.nuxt-content-container {
+  margin-top: $space-base * 2;
+  padding-top: $space-base * 2;
+  border-top: 1px solid #444;
+}
+</style>
