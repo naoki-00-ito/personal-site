@@ -3,12 +3,15 @@
     <!-- header -->
     <header>
       <v-app-bar app dark>
-        <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
         <v-toolbar-title>{{ appName }}</v-toolbar-title>
+        <v-app-bar-nav-icon
+          @click="drawer = true"
+          class="ml-auto"
+        ></v-app-bar-nav-icon>
       </v-app-bar>
 
       <!-- drawer -->
-      <v-navigation-drawer v-model="drawer" fixed temporary>
+      <v-navigation-drawer v-model="drawer" right fixed temporary>
         <v-list nav dense>
           <!-- links default -->
           <v-list-item-group>
@@ -18,9 +21,11 @@
           </v-list-item-group>
           <!-- /links default -->
 
+          <v-divider />
+
           <!-- links category -->
-          <p class="text-subtitle-1 mt-5 mb-2">カテゴリ</p>
-          <v-list-item-group>
+          <v-list-item-group class="my-6">
+            <v-list-item-title class="mb-2">カテゴリ</v-list-item-title>
             <v-list-item
               v-for="(category, index) in $store.state.category"
               :key="'category-' + index"
@@ -31,9 +36,11 @@
           </v-list-item-group>
           <!-- /links category -->
 
+          <v-divider />
+
           <!-- links tag -->
-          <p class="text-subtitle-1 mt-5 mb-2">タグ</p>
-          <v-list-item-group>
+          <v-list-item-group class="my-6">
+            <v-list-item-title class="mb-2">タグ</v-list-item-title>
             <v-list-item
               v-for="(tag, index) in $store.state.tags"
               :key="'tag-' + index"
