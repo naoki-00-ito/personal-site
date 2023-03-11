@@ -9,7 +9,14 @@
     <!-- header -->
     <header>
       <v-app-bar app dark>
-        <v-toolbar-title>{{ appName }}</v-toolbar-title>
+        <v-toolbar-title>
+          <div class="site-name">
+            <a href="/" class="site-name__link">
+              <img src="/logo.png" :alt="appName" class="site-name__logo" />
+              <span class="site-name__text">{{ appName }}</span>
+            </a>
+          </div>
+        </v-toolbar-title>
         <v-app-bar-nav-icon
           @click="drawer = true"
           class="ml-auto"
@@ -150,7 +157,7 @@ export default {
   data() {
     return {
       drawer: false,
-      appName: "Blog",
+      appName: "Naoki's Blog",
       loading: true,
     };
   },
@@ -170,5 +177,33 @@ export default {
 <style scoped lang="scss">
 .pointer-events-none {
   pointer-events: none;
+}
+
+.site-name {
+  &__link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    transition: 0.3s;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  &__logo {
+    display: block;
+    height: 40px;
+    width: auto;
+  }
+
+  &__text {
+    flex: 1;
+    margin-left: 10px;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: bold;
+  }
 }
 </style>
