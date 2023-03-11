@@ -12,6 +12,7 @@
           v-if="pg.pg"
           :to="'/articles/page/' + pg.num"
           :class="current == pg.num ? 'is-current' : ''"
+          class="white--text"
         >
           {{ pg.num }}
         </nuxt-link>
