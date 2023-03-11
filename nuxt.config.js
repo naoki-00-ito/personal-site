@@ -10,6 +10,7 @@ export default {
     const appName = process.env.APP_NAME;
     const pageDescription = process.env.npm_package_description;
     const ogImage = `${baseUrl}/og.png`;
+    const gaId = process.env.GA_ID;
 
     return {
       titleTemplate: `%s | ${appName}`,
@@ -33,6 +34,15 @@ export default {
         { hid: 'og:locale', property: 'og:locale', content: 'ja_JP' },
         { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' }
       ],
+
+      script: [{
+        async: true,
+        src: `https://www.googletagmanager.com/gtag/js?id=${gaId}`
+      },
+      {
+        innerHTML: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', "${gaId}");`
+      }
+      ],
     }
   },
 
@@ -55,8 +65,6 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
-    // Google Analytics
-    "@nuxtjs/google-gtag",
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -96,11 +104,6 @@ export default {
     icons: {
       iconfont: 'mdi',
     },
-  },
-
-  "google-gtag": {
-    id: process.env.GA_ID,
-    debug: true
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
