@@ -20,6 +20,7 @@ export default {
       { hid: 'og:title', property: 'og:title', content: process.env.APP_NAME },
       { hid: 'og:description', property: 'og:description', content: process.env.npm_package_description },
       { hid: 'og:image', property: 'og:image', content: `${process.env.BASE_URL}/og.png` },
+      { hid: 'og:locale', property: 'og:locale', content: 'ja_JP' },
       { name: 'twitter:card', content: 'summary' }
     ],
     link: [
