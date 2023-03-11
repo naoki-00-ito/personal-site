@@ -13,6 +13,12 @@
       <!-- drawer -->
       <v-navigation-drawer v-model="drawer" right fixed temporary>
         <v-list nav dense>
+          <v-list-item class="px-0 d-flex justify-end">
+            <v-btn icon @click="drawer = false" class="text-right">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </v-list-item>
+
           <!-- links default -->
           <v-list-item-group>
             <v-list-item :to="'/'">
