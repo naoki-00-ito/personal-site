@@ -19,7 +19,7 @@
 <script>
 import ArticleCard from "@/components/ArticleCard";
 import MoreButton from "@/components/MoreButton";
-const taxonomys = require("@/taxonomy.js");
+import taxonomys from "@/plugins/taxonomy.js";
 
 export default {
   head() {

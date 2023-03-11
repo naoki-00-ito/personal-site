@@ -5,27 +5,36 @@ export default {
   target: 'static',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
-  head: {
-    titleTemplate: `%s | ${process.env.APP_NAME}`,
-    htmlAttrs: {
-      lang: 'ja'
-    },
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description },
-      { name: 'format-detection', content: 'telephone=no' },
-      { hid: 'og:site_name', property: 'og:site_name', content: process.env.APP_NAME },
-      { hid: 'og:type', property: 'og:type', content: 'article' },
-      { hid: 'og:url', property: 'og:url', content: process.env.BASE_URL },
-      { hid: 'og:title', property: 'og:title', content: process.env.APP_NAME },
-      { hid: 'og:description', property: 'og:description', content: process.env.npm_package_description },
-      { hid: 'og:image', property: 'og:image', content: `${process.env.BASE_URL}/image/og.png` },
-      { name: 'twitter:card', content: 'summary' }
-    ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+  head() {
+    const baseUrl = process.env.BASE_URL
+    const appName = process.env.APP_NAME
+    const pageDescription = process.env.npm_package_description
+    const ogUrl = `${baseUrl}${this.$route.path}`
+    const ogImage = `${baseUrl}/og.png`
+
+    return {
+      titleTemplate: `%s | ${appName}`,
+      htmlAttrs: {
+        lang: 'ja'
+      },
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      ],
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { hid: 'description', name: 'description', content: pageDescription },
+        { name: 'format-detection', content: 'telephone=no' },
+        { hid: 'og:site_name', property: 'og:site_name', content: appName },
+        { hid: 'og:url', property: 'og:url', content: ogUrl },
+        { hid: 'og:type', property: 'og:type', content: 'article' },
+        { hid: 'og:title', property: 'og:title', content: appName },
+        { hid: 'og:description', property: 'og:description', content: pageDescription },
+        { hid: 'og:image', property: 'og:image', content: ogImage },
+        { hid: 'og:locale', property: 'og:locale', content: 'ja_JP' },
+        { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' }
+      ],
+    }
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

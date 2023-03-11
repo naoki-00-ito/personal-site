@@ -29,7 +29,7 @@
 
 <script>
 import ArticleCard from "@/components/ArticleCard";
-const taxonomys = require("@/taxonomy.js");
+import taxonomys from "@/plugins/taxonomy.js";
 
 export default {
   head() {
