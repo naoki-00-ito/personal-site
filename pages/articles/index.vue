@@ -5,34 +5,39 @@
         <ArticleCard :article="article" />
       </v-col>
     </v-row>
+
+    <MoreButton
+      url="/articles/page/1"
+      :articleNum="articles.length"
+      :requiredArticleNum="requiredArticleNum"
+    />
   </div>
 </template>
 
 <script>
 import ArticleCard from "@/components/ArticleCard";
+import MoreButton from "@/components/MoreButton";
 
 export default {
   head() {
     return {
-      title: "nuxt-blog",
+      title: process.env.APP_NAME,
       titleTemplate: "",
-    };
-  },
-  data() {
-    return {
-      page: 1,
+      meta: [{ hid: "og:type", property: "og:type", content: "website" }],
     };
   },
   components: {
     ArticleCard,
+    MoreButton,
   },
-  async asyncData({ $content }) {
+  async asyncData({ store, $content }) {
+    const requiredArticleNum = store.state.indexPerPage;
     const articles = await $content("articles")
       .sortBy("createdAt", "desc")
-      .skip(0)
-      .limit(15)
+      .limit(requiredArticleNum)
       .fetch();
     return {
+      requiredArticleNum,
       articles,
     };
   },
