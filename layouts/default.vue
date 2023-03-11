@@ -22,6 +22,9 @@
           <!-- links default -->
           <v-list-item-group>
             <v-list-item :to="'/'">
+              <v-list-item-icon>
+                <v-icon class="mt-n1">mdi-home</v-icon>
+              </v-list-item-icon>
               <v-list-item-title>HOME</v-list-item-title>
             </v-list-item>
           </v-list-item-group>
@@ -31,7 +34,12 @@
 
           <!-- links category -->
           <v-list-item-group class="my-6">
-            <v-list-item-title class="mb-2">カテゴリ</v-list-item-title>
+            <v-list-item class="mb-2 pointer-events-none">
+              <v-list-item-icon>
+                <v-icon small class="mt-n1">mdi-folder</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>カテゴリ</v-list-item-title>
+            </v-list-item>
             <v-list-item
               v-for="(category, index) in $store.state.category"
               :key="'category-' + index"
@@ -46,7 +54,12 @@
 
           <!-- links tag -->
           <v-list-item-group class="my-6">
-            <v-list-item-title class="mb-2">タグ</v-list-item-title>
+            <v-list-item class="mb-2 pointer-events-none">
+              <v-list-item-icon>
+                <v-icon small class="mr-1">mdi-label</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>タグ</v-list-item-title>
+            </v-list-item>
             <v-list-item
               v-for="(tag, index) in $store.state.tags"
               :key="'tag-' + index"
@@ -132,3 +145,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.pointer-events-none {
+  pointer-events: none;
+}
+</style>
