@@ -1,5 +1,11 @@
 <template>
   <v-app>
+    <!-- Loading -->
+    <div v-if="loading">
+      <Loading />
+    </div>
+    <!-- /Loading -->
+
     <!-- header -->
     <header>
       <v-app-bar app dark>
@@ -138,11 +144,24 @@
 </template>
 
 <script>
+import Loading from "@/components/Loading";
+
 export default {
   data() {
     return {
       drawer: false,
       appName: "Blog",
+      loading: true,
+    };
+  },
+  components: {
+    Loading,
+  },
+  mounted() {
+    document.onreadystatechange = () => {
+      if (document.readyState === "complete") {
+        this.loading = false;
+      }
     };
   },
 };
