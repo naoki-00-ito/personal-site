@@ -22,7 +22,7 @@
           <!-- links default -->
           <v-list-item-group>
             <v-list-item :to="'/'">
-              <v-list-item-icon>
+              <v-list-item-icon class="mr-2">
                 <v-icon class="mt-n1">mdi-home</v-icon>
               </v-list-item-icon>
               <v-list-item-title>HOME</v-list-item-title>
@@ -34,8 +34,8 @@
 
           <!-- links category -->
           <v-list-item-group class="my-6">
-            <v-list-item class="mb-2 pointer-events-none">
-              <v-list-item-icon>
+            <v-list-item class="pointer-events-none">
+              <v-list-item-icon class="mr-2">
                 <v-icon small class="mt-n1">mdi-folder</v-icon>
               </v-list-item-icon>
               <v-list-item-title>カテゴリ</v-list-item-title>
@@ -44,6 +44,7 @@
               v-for="(category, index) in $store.state.category"
               :key="'category-' + index"
               :to="'/category/' + category.slug"
+              class="pl-10"
             >
               <v-list-item-title>{{ category.name }}</v-list-item-title>
             </v-list-item>
@@ -54,8 +55,8 @@
 
           <!-- links tag -->
           <v-list-item-group class="my-6">
-            <v-list-item class="mb-2 pointer-events-none">
-              <v-list-item-icon>
+            <v-list-item class="pointer-events-none">
+              <v-list-item-icon class="mr-2">
                 <v-icon small class="mr-1">mdi-label</v-icon>
               </v-list-item-icon>
               <v-list-item-title>タグ</v-list-item-title>
@@ -64,6 +65,7 @@
               v-for="(tag, index) in $store.state.tags"
               :key="'tag-' + index"
               :to="'/tag/' + tag.slug"
+              class="pl-10"
             >
               <v-list-item-title>{{ tag.name }}</v-list-item-title>
             </v-list-item>
