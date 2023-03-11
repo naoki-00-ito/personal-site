@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>カテゴリ「{{ taxonomyname }}」- {{ this.pageNum }}ページ</h1>
+    <h1>タグ「{{ taxonomyname }}」- {{ this.pageNum }}ページ</h1>
 
     <v-row class="mt-4">
       <v-col v-for="article in articles" :key="article.slug" cols="12">
@@ -54,7 +54,7 @@ export default {
   },
   async created() {
     const slug = this.$route.params.slug;
-    const taxonomy = taxonomys.category.find((c) => c.slug === slug);
+    const taxonomy = taxonomys.tags.find((c) => c.slug === slug);
     this.taxonomyname = taxonomy ? taxonomy.name : "";
     this.pageNum = this.$route.params.id;
   },
