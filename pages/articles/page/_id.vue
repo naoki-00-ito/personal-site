@@ -29,8 +29,24 @@
 import ArticleCard from "@/components/ArticleCard";
 
 export default {
+  head() {
+    const title = `記事一覧 - ${this.pageNum}ページ`;
+    return {
+      title: title,
+      meta: [
+        {
+          hid: "og:title",
+          property: "og:title",
+          content: `${title} | ${process.env.APP_NAME}`,
+        },
+      ],
+    };
+  },
   components: {
     ArticleCard,
+  },
+  async created() {
+    this.pageNum = this.$route.params.id;
   },
   validate({ redirect, params }) {
     if (/[0-9]+/.test(params.id)) return true;
