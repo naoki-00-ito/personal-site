@@ -1,4 +1,4 @@
-import taxonomy from '@/taxonomy';
+import taxonomy from '@/plugins/taxonomy';
 
 export const state = () => ({
   category: [

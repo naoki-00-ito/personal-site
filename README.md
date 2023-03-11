@@ -1,7 +1,31 @@
-# nuxt-blog
+# personal-site
+
+## 環境情報
 
 node  v16.14.0  
-npm 8.3.1
+npm 8.3.1  
+nuxt@2.16.1
+
+## サイト構成
+
+```
+TOP 自己紹介ページ [ / ]   
+※未作成なので現状はブログ一覧を表示  
+│ 
+├ ブログ一覧 [ /articles ]  
+│ │
+│ ├ 詳細 [ /articles/{article-name} ]
+│ │
+│ └ ブログ {number}ページ [ /articles/page/{number} ]
+│
+├ カテゴリ一覧　[ /category/{name} ] 
+│ │
+│ └ カテゴリ {number}ページ [ /category/{name}/page/{number} ]
+│ 
+└ タグ一覧　[ /tag/{name} ] 
+  │
+  └ タグ {number}ページ [ /tag/{name}/page/{number} ]
+```  
 
 
 ## Build Setup

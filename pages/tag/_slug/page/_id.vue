@@ -29,11 +29,13 @@
 
 <script>
 import ArticleCard from "@/components/ArticleCard";
-const taxonomys = require("@/taxonomy.js");
+import taxonomys from "@/plugins/taxonomy.js";
 
 export default {
   head() {
     const title = `「${this.taxonomyname}」の記事一覧 - ${this.pageNum}ページ`;
+    const baseUrl = process.env.BASE_URL;
+    const ogUrl = `${baseUrl}${this.$route.path}`;
     return {
       title: title,
       meta: [
@@ -42,6 +44,7 @@ export default {
           property: "og:title",
           content: `${title} | ${process.env.APP_NAME}`,
         },
+        { hid: "og:url", property: "og:url", content: ogUrl },
       ],
     };
   },

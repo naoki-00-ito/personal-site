@@ -20,10 +20,15 @@ import MoreButton from "@/components/MoreButton";
 
 export default {
   head() {
+    const baseUrl = process.env.BASE_URL;
+    const ogUrl = `${baseUrl}${this.$route.path}`;
     return {
       title: process.env.APP_NAME,
       titleTemplate: "",
-      meta: [{ hid: "og:type", property: "og:type", content: "website" }],
+      meta: [
+        { hid: "og:type", property: "og:type", content: "website" },
+        { hid: "og:url", property: "og:url", content: ogUrl },
+      ],
     };
   },
   components: {
