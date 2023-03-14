@@ -5,7 +5,11 @@
     <v-divider class="mx-3 my-n1"></v-divider>
     <v-card-text class="pb-0">
       <div class="mt-n2 ml-n2">
-        <span v-for="(category, index) in article.category" :key="index" :data-category="category">
+        <span
+          v-for="(category, index) in article.category"
+          :key="index"
+          :data-category="category"
+        >
           <Category :categoryName="category" />
         </span>
       </div>
@@ -21,8 +25,8 @@
 </template>
 
 <script>
-import Category from "@/components/Category"
-import Tag from "@/components/Tag"
+import Category from "@/components/Category";
+import Tag from "@/components/Tag";
 
 export default {
   name: "ArticleCard",
